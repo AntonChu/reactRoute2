@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import { PostsRender } from "./components/PostsRender";
 import { NewPost } from "./components/NewPost";
@@ -7,10 +7,12 @@ import { NewPost } from "./components/NewPost";
 const Social = () => {
   const [posts, setPosts] = useState([]);
   console.log(posts);
+  const navigate = useNavigate();
 
-  const submit = () => {
+  const submit = (event) => {
+    console.log(event);
     //получить значение в тексэриа, вызвать requestPost
-  }
+  };
 
   const requestGet = () => {
     let request = new XMLHttpRequest();
@@ -21,6 +23,7 @@ const Social = () => {
       if (request.readyState === request.DONE) {
         console.log(`GET ${request.response}`);
         setPosts(request.response);
+        navigate("/");
         // переход на "/"
       }
     };
@@ -28,30 +31,29 @@ const Social = () => {
 
   const requestDelete = (id) => {
     let request = new XMLHttpRequest();
-    request.open('DELETE', `http://localhost:7777/notes/${id}`);
+    request.open("DELETE", `http://localhost:7777/notes/${id}`);
     request.send();
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
-        requestGet()
+        requestGet();
       }
     };
-  }
+  };
 
-  const requestPost = (form, text) => {
+  const requestPost = (text) => {
     let formData = new FormData(form);
-    console.log(formData);
-    console.log(text)
     formData.append("text", text);
-    console.log(formData.has('text'));
     let request = new XMLHttpRequest();
-    request.open('POST', "http://localhost:7777/notes");
-    request.send(formData);
+    request.open("POST", "http://localhost:7777/posts");
+    request.setRequestHeader("Content-Type", "application/ json");
+    request.send(JSON.stringify({ text }));
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
-        requestGet()
+        console.log(request);
+        requestGet();
       }
-    }
-  }
+    };
+  };
 
   useEffect(() => {
     requestGet();
@@ -61,24 +63,25 @@ const Social = () => {
   // /posts/{postId}
 
   return (
-    <button className="create-post">
-      <Link to={"/posts/new"}>Создать</Link>
-    </button>
-  );
-};
-
-function App() {
-  return (
     <>
-      <Social />
+      <button className="create-post">
+        <Link to={"/posts/new"}>Создать</Link>
+      </button>
       <div className="main-wrapper">
         <Routes>
-          <Route path="/" element={<PostsRender />} />
-          <Route path="/posts/new" element={<NewPost />} />
+          <Route path="/" element={<PostsRender posts={posts} />} />
+          <Route
+            path="/posts/new"
+            element={<NewPost requestPost={requestPost} />}
+          />
         </Routes>
       </div>
     </>
   );
+};
+
+function App() {
+  return <Social />;
 }
 
 export default App;
