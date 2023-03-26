@@ -41,11 +41,9 @@ const Social = () => {
   };
 
   const requestPost = (text) => {
-    let formData = new FormData(form);
-    formData.append("text", text);
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:7777/posts");
-    request.setRequestHeader("Content-Type", "application/ json");
+    request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     request.send(JSON.stringify({ text }));
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
