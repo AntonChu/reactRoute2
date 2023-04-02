@@ -17,7 +17,7 @@ export const PostsRender = ({ posts }) => {
       {posts.map((el) => {
         return (
           <Link to={`/posts/${el.id}`}>
-            <div className="post-wrapper" key={id}>
+            <div className="post-wrapper" key={el.id}>
               <div className="post-header">
                 <figure className="img-container">
                   <img src="#" className="img" />

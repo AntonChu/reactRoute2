@@ -6,7 +6,6 @@ import { NewPost } from "./components/NewPost";
 
 const Social = () => {
   const [posts, setPosts] = useState([]);
-  console.log(posts);
   const navigate = useNavigate();
 
   const submit = (event) => {
@@ -24,7 +23,6 @@ const Social = () => {
         console.log(`GET ${request.response}`);
         setPosts(request.response);
         navigate("/");
-        // переход на "/"
       }
     };
   };
@@ -47,7 +45,6 @@ const Social = () => {
     request.send(JSON.stringify({ text }));
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
-        console.log(request);
         requestGet();
       }
     };
@@ -68,10 +65,7 @@ const Social = () => {
       <div className="main-wrapper">
         <Routes>
           <Route path="/" element={<PostsRender posts={posts} />} />
-          <Route
-            path="/posts/new"
-            element={<NewPost requestPost={requestPost} />}
-          />
+          <Route path="/posts/new" element={<NewPost requestPost={requestPost} requestGet={requestGet}/>} />
         </Routes>
       </div>
     </>
