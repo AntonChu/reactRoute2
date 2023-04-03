@@ -23,7 +23,7 @@ export const PostsRender = ({ posts }) => {
                   <img src="#" className="img" />
                 </figure>
                 <div className="header-item">
-                  <dav className="name">Персонаж о котором вы говорите</dav>
+                  <div className="name">Персонаж о котором вы говорите</div>
                   <div className="status">
                     <div className="position">Position</div>
                     <div className="date">{el.created}</div>

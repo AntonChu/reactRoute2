@@ -20,7 +20,7 @@ const Social = () => {
     request.send();
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
-        console.log(`GET ${request.response}`);
+        console.log(`GET ответ сервера -> ${request.response}`);
         setPosts(request.response);
         navigate("/");
       }
@@ -39,6 +39,7 @@ const Social = () => {
   };
 
   const requestPost = (text) => {
+    console.log(text);
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:7777/posts");
     request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
