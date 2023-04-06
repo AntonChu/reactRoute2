@@ -89,3 +89,36 @@ button:focus-visible {
   top: -20px;
   right: -20px;
 }
+
+.post-wrapper {
+  background-color: #97c5ed;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.post-header,
+.status {
+  display: flex;
+}
+
+.name {
+  color: #213547;
+  font-size: 24px;
+}
+
+.reaction {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #9d9e9f;
+  border-top: 1px solid #9d9e9f;
+}
+
+.position,
+.date {
+  color: #686868;
+  margin-right: 20px;
+}
+
+.reaction-button {
+  background-color: transparent;
+}

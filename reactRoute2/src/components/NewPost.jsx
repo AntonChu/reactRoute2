@@ -7,8 +7,6 @@ export const NewPost = ({ requestPost }) => {
     const form = document.getElementById('form')
     const text = {content: event.target[0].value};
     requestPost(text);
-
-    //получить значение в тексэриа, вызвать requestPost
   }
   
   return (
