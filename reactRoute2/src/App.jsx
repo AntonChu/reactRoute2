@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import "./App.css";
 import { PostsRender } from "./components/PostsRender";
 import { NewPost } from "./components/NewPost";
@@ -8,11 +8,8 @@ import { PostReview } from "./components/PostReview";
 const Social = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
-
-  const submit = (event) => {
-    console.log(event);
-    //получить значение в тексэриа, вызвать requestPost
-  };
+  const id = useParams();
+  console.log(id)
 
   const requestGet = () => {
     let request = new XMLHttpRequest();
@@ -70,16 +67,16 @@ const Social = () => {
           <Route
             path="/posts/new"
             element={
-              <NewPost requestPost={requestPost} requestGet={requestGet} />
+              <NewPost requestPost={requestPost}/>
             }
           />
           <Route
-            path={`/posts/${/[0-9]/}`}
+            path={`/posts/:id`}
             element={
               <PostReview
+                posts={posts}
                 requestPost={requestPost}
                 requestDelete={requestDelete}
-                posts={posts}
               />
             }
           />

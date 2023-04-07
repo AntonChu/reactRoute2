@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const PostsRender = ({ posts }) => {
+export const PostsRender = ({ posts, setId }) => {
   if (!posts) {
     return;
   }
@@ -21,8 +21,8 @@ export const PostsRender = ({ posts }) => {
     <>
       {posts.map((el) => {
         return (
-          <Link to={`/posts/${el.id}`} key={el.id}>
-            <div className="post-wrapper">
+          <Link key={el.id} to={`/posts/${el.id}`} >
+            <div className="post-wrapper" >
               <div className="post-header">
                 <figure className="img-container">
                   <img src="#" className="img" />
