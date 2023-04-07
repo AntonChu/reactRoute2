@@ -122,3 +122,18 @@ button:focus-visible {
 .reaction-button {
   background-color: transparent;
 }
+
+.change-block {
+  padding-top: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+.fix-button {
+  background-color: #2f75b2;
+  margin-right: 5px;
+}
+
+.delete-button {
+  background-color: rgb(190, 75, 75);
+}

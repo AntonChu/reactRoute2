@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const PostsRender = ({ posts, setId }) => {
+export const PostsRender = ({ posts, countTime }) => {
   if (!posts) {
     return;
   }
@@ -11,11 +11,6 @@ export const PostsRender = ({ posts, setId }) => {
     console.log(event);
     //получить значение в тексэриа, вызвать requestPost
   };
-
-  const countTime = (time) => {
-    const curentTime = new Date().getTime();
-    return Math.floor((curentTime - time) / (1000 * 60));
-  }
 
   return (
     <>

@@ -9,7 +9,6 @@ const Social = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   const id = useParams();
-  console.log(id)
 
   const requestGet = () => {
     let request = new XMLHttpRequest();
@@ -27,7 +26,7 @@ const Social = () => {
 
   const requestDelete = (id) => {
     let request = new XMLHttpRequest();
-    request.open("DELETE", `http://localhost:7070/notes/${id}`);
+    request.open("DELETE", `http://localhost:7070/posts/${id}`);
     request.send();
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
@@ -49,6 +48,11 @@ const Social = () => {
     };
   };
 
+  const countTime = (time) => {
+    const curentTime = new Date().getTime();
+    return Math.floor((curentTime - time) / (1000 * 60));
+  };
+
   useEffect(() => {
     requestGet();
   }, []);
@@ -63,18 +67,20 @@ const Social = () => {
       </button>
       <div className="main-wrapper">
         <Routes>
-          <Route path="/" element={<PostsRender posts={posts} />} />
+          <Route
+            path="/"
+            element={<PostsRender posts={posts} countTime={countTime} />}
+          />
           <Route
             path="/posts/new"
-            element={
-              <NewPost requestPost={requestPost}/>
-            }
+            element={<NewPost requestPost={requestPost} />}
           />
           <Route
             path={`/posts/:id`}
             element={
               <PostReview
                 posts={posts}
+                countTime={countTime}
                 requestPost={requestPost}
                 requestDelete={requestDelete}
               />
