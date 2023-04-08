@@ -4,6 +4,7 @@ import "./App.css";
 import { PostsRender } from "./components/PostsRender";
 import { NewPost } from "./components/NewPost";
 import { PostReview } from "./components/PostReview";
+import { PostFix } from "./components/PostFix";
 
 const Social = () => {
   const [posts, setPosts] = useState([]);
@@ -35,12 +36,15 @@ const Social = () => {
     };
   };
 
-  const requestPost = (text) => {
-    console.log(text);
+  const requestPost = (text, id = undefined) => {
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:7070/posts");
     request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    request.send(JSON.stringify({ text }));
+    if (id) {
+      request.send(JSON.stringify({ text }), id);
+    } else {
+      request.send(JSON.stringify({ text }));
+    }
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
         requestGet();
@@ -59,6 +63,7 @@ const Social = () => {
   // /list
   // /posts/new
   // /posts/{postId}
+   // /posts/{postId}/fix
 
   return (
     <>
@@ -76,7 +81,7 @@ const Social = () => {
             element={<NewPost requestPost={requestPost} />}
           />
           <Route
-            path={`/posts/:id`}
+            path="/posts/:id"
             element={
               <PostReview
                 posts={posts}
@@ -85,6 +90,10 @@ const Social = () => {
                 requestDelete={requestDelete}
               />
             }
+          />
+          <Route
+            path="/posts/:id/fix"
+            element={<PostFix posts={posts} requestPost={requestPost} />}
           />
         </Routes>
       </div>

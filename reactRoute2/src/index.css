@@ -137,3 +137,8 @@ button:focus-visible {
 .delete-button {
   background-color: rgb(190, 75, 75);
 }
+
+.fix-header {
+  display: flex;
+  justify-content: space-around;
+}

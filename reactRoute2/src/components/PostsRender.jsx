@@ -6,12 +6,6 @@ export const PostsRender = ({ posts, countTime }) => {
     return;
   }
 
-  const submit = (event) => {
-    event.preventDefault();
-    console.log(event);
-    //получить значение в тексэриа, вызвать requestPost
-  };
-
   return (
     <>
       {posts.map((el) => {

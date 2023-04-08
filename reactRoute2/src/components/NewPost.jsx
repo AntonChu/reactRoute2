@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export const NewPost = ({ requestPost }) => {
   const submit = (event) => {
     event.preventDefault();
-    const form = document.getElementById('form')
     const text = {content: event.target[0].value};
     requestPost(text);
   }

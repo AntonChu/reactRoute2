@@ -1,9 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const PostReview = ({ posts, countTime, requestDelete }) => {
-    const targetId = useParams().id;
-    let targetPost = posts.find((el) => Number(targetId) === el.id);
+  const targetId = Number(useParams().id);
+  const onDeleteHandler = () => requestDelete(targetId);
+  let targetPost = posts.find((el) => targetId === el.id);
 
   return (
     <div className="post-wrapper">
@@ -25,8 +26,16 @@ export const PostReview = ({ posts, countTime, requestDelete }) => {
         <button className="reaction-button">Comment</button>
       </div>
       <div className="change-block">
-        <button className="reaction-button fix-button">Редактировать</button>
-        <button onClick={requestDelete(Number(targetId))} className="reaction-button delete-button">Удалить</button>
+        <Link to={`/posts/${targetId}/fix`}>
+          <button className="reaction-button fix-button">Редактировать</button>
+        </Link>
+
+        <button
+          onClick={onDeleteHandler}
+          className="reaction-button delete-button"
+        >
+          Удалить
+        </button>
       </div>
     </div>
   );
