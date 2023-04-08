@@ -36,15 +36,11 @@ const Social = () => {
     };
   };
 
-  const requestPost = (text, id = undefined) => {
+  const requestPost = (text, idPost = undefined) => {
     let request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:7070/posts");
+    request.open("POST", "http://localhost:7070/posts", { id: idPost });
     request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    if (id) {
-      request.send(JSON.stringify({ text }), id);
-    } else {
-      request.send(JSON.stringify({ text }));
-    }
+    request.send(JSON.stringify({ text }));
     request.onreadystatechange = function () {
       if (request.readyState === request.DONE) {
         requestGet();
@@ -63,7 +59,7 @@ const Social = () => {
   // /list
   // /posts/new
   // /posts/{postId}
-   // /posts/{postId}/fix
+  // /posts/{postId}/fix
 
   return (
     <>
